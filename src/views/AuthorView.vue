@@ -1,37 +1,42 @@
 <template>
   <ul>
-    <li v-bind:key="author._id" v-for="author in allAuthors">
+    <li v-bind:key="author._id" v-for="author in authors.allAuthors">
       <h2>{{author.name}}</h2>
       <p>{{author.description}}</p>
     </li>
-
   </ul>
+  <Button @btnClick="$emit('getAuthors')" text="Load More Authors"/>
+  
   
 </template>
+
+
 <script>
-import axios from 'axios'
+import Button from "../components/Button.vue";
 export default {
-  data(){
-    return {
-      allAuthors : [],
-      page: 0,
-    }
+  props : {
+    authors : Object
   },
-  methods: {
-    async getAuthors(){
-      try {
-        this.page++;
-        const authors = await axios.get(`http://api.quotable.io/authors?page=${this.page}`);
-        this.allAuthors = [...this.allAuthors, ...authors.data.results];
-        console.log(this.allAuthors)
-      } catch (error) {
-        console.log(error)
-        
-      }
-    }
-  },
-  async created(){
-    this.getAuthors();
+  components : {
+    Button,
   }
 }
 </script>
+
+<style lang="scss" scoped>
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  li{
+    margin: 10px;
+    background-color: aquamarine;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px gray;
+    cursor: pointer;
+  }
+  padding-bottom: 20px;
+}
+</style>

@@ -3,8 +3,57 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/authors">Authors</router-link>
   </nav>
-  <router-view />
+  <router-view 
+    :randomQuote="randomQuote"
+    :authors="authors"
+    @getAuthors="getAuthors"
+    @getRandomQuote="getRandomQuote"
+  />
 </template>
+
+<script>
+import axios from "axios"
+export default {
+  data() {
+    return {
+      randomQuote : {
+        content : '',
+        author : '',
+      },
+      authors : {
+        allAuthors : [],
+        page: 0,
+      }
+    }
+  },
+  created() {
+    this.getRandomQuote();
+    this.getAuthors();
+  },
+  methods : {
+    async getAuthors(){
+      try {
+        this.authors.page++;
+        const authors = await axios.get(`http://api.quotable.io/authors?page=${this.authors.page}`);
+        this.authors.allAuthors = [...this.authors.allAuthors, ...authors.data.results];
+      } catch (error) {
+        console.log(error)
+        
+      }
+    },
+    async getRandomQuote(){
+      try {
+        const randomQuote = await axios.get('http://api.quotable.io/random');
+        const {content, author} = randomQuote.data;
+        this.randomQuote.content = content;
+        this.randomQuote.author = author;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -14,6 +63,9 @@
   max-width: 1080px;
   margin: auto;
   height: 100%;
+}
+* {
+  box-sizing: border-box;
 }
 
 nav {

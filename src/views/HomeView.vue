@@ -1,35 +1,20 @@
 <template>
-  <button @click="randomQuote">Random</button>
+  <Button @btnClick="$emit('getRandomQuote')" text="Random"/>
   <div>
-    <h2>{{content}}</h2>
-    <p>-{{author}}</p>
+    <h2>{{randomQuote.content}}</h2>
+    <p>-{{randomQuote.author}}</p>
   </div>
 </template>
 
 <script>
+import Button from "../components/Button.vue";
 
-import axios from "axios"
 export default {
-  data() {
-    return {
-      content : '',
-      author : '',
-    }
+  props : {
+    randomQuote : Object
   },
-  created() {
-    this.randomQuote()
-  },
-  methods : {
-    async randomQuote(){
-      try {
-        const randomQuote = await axios.get('http://api.quotable.io/random');
-        const {content, author} = randomQuote.data;
-        this.content = content;
-        this.author = author;
-      } catch (error) {
-        
-      }
-    }
+  components : {
+    Button
   }
 }
 </script>
@@ -42,6 +27,11 @@ div {
   flex-direction: column;
   align-items: center;
   margin: auto;
+  background-color: aquamarine;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px gray;
+  margin-top: 30px;
 }
 p{
   align-self: flex-end;
