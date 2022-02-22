@@ -28,9 +28,6 @@ export default {
     Button,
     Form
   },
-  created() {
-    this.$emit('getAuthors')
-  }
 }
 </script>
 

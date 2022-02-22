@@ -21,10 +21,6 @@ export default {
     Button,
     Form,
   },
-
-  created(){
-    this.$emit('getAllQuotes')
-  }
   
 }
 </script>

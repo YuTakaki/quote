@@ -37,6 +37,8 @@ export default {
   },
   created() {
     this.getRandomQuote();
+    this.getAuthors();
+    this.getAllQuotes();
   },
   methods : {
     async searchAuthor(value) {
