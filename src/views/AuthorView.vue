@@ -1,12 +1,15 @@
 <template>
-  <ul>
-    <li v-bind:key="author._id" v-for="author in authors.allAuthors">
-      <h2>{{author.name}}</h2>
-      <p>{{author.description}}</p>
-    </li>
-  </ul>
-  <Button @btnClick="$emit('getAuthors')" text="Load More Authors"/>
-  
+  <main>
+    <ul>
+      <li v-bind:key="author._id" v-for="author in authors.allAuthors">
+        <router-link :to="`/authors/${author.slug}`">
+          <h2>{{author.name}}</h2>
+          <p>{{author.description}}</p>
+        </router-link>
+      </li>
+    </ul>
+    <Button @btnClick="$emit('getAuthors')" text="Load More Authors"/>
+  </main>
   
 </template>
 
@@ -36,6 +39,10 @@ ul {
     border-radius: 5px;
     box-shadow: 1px 1px 3px gray;
     cursor: pointer;
+    a{
+      text-decoration: none;
+      color: black;
+    }
   }
   padding-bottom: 20px;
 }

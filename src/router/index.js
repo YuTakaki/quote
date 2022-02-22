@@ -10,6 +10,11 @@ const routes = [
     path: '/authors',
     name: 'authors',
     component: () => import('../views/AuthorView')
+  },
+  {
+    path: '/authors/:slug',
+    name: 'authors-profile',
+    component: () => import('../views/AuthorProfileView')
   }
 ]
 

@@ -8,6 +8,7 @@
     :authors="authors"
     @getAuthors="getAuthors"
     @getRandomQuote="getRandomQuote"
+
   />
 </template>
 
