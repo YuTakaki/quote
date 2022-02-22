@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Form @onSubmit="(value) => $emit('searchAuthor', value)" placeholder="search authors"/>
     <ul>
       <li v-bind:key="author._id" v-for="author in authors.allAuthors">
         <router-link :to="`/authors/${author.slug}`">
@@ -15,13 +16,17 @@
 
 
 <script>
+
 import Button from "../components/Button.vue";
+import Form from "../components/Form.vue";
+
 export default {
   props : {
     authors : Object
   },
   components : {
     Button,
+    Form
   },
   created() {
     this.$emit('getAuthors')
@@ -40,6 +45,7 @@ ul {
     background-color: aquamarine;
     padding: 5px 10px;
     border-radius: 5px;
+    width: 100%;
     box-shadow: 1px 1px 3px gray;
     cursor: pointer;
     a{
@@ -48,5 +54,12 @@ ul {
     }
   }
   padding-bottom: 20px;
+}
+
+@media only screen and (min-width: 600px) {
+  li{
+    width: max-content !important;
+  }
+
 }
 </style>

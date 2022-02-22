@@ -1,5 +1,6 @@
 <template>
   <main>
+    <Form @onSubmit="(value) => $emit('searchQuotes', value)" placeholder="search quotes"/>
     <QuoteCard v-bind:key="quote._id" v-for="quote in quotes.allQuotes" :randomQuote="quote"/>
     <Button @btnClick="$emit('getAllQuotes')" text="View more quotes" />
   </main>
@@ -9,6 +10,7 @@
 <script>
 import QuoteCard from "../components/QuoteCard.vue";
 import Button from "../components/Button.vue"
+import Form from "../components/Form.vue"
 
 export default {
   props : {
@@ -17,6 +19,7 @@ export default {
   components : {
     QuoteCard,
     Button,
+    Form,
   },
 
   created(){

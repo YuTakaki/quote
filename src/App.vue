@@ -11,6 +11,8 @@
     @getAuthors="getAuthors"
     @getAllQuotes="getAllQuotes"
     @getRandomQuote="getRandomQuote"
+    @searchAuthor="searchAuthor"
+    @searchQuotes="searchQuotes"
   />
 </template>
 
@@ -37,8 +39,31 @@ export default {
     this.getRandomQuote();
   },
   methods : {
+    async searchAuthor(value) {
+      try {
+        this.authors.page = 0;
+        const authors = await axios.get(`http://api.quotable.io/search/authors?query=${value}`);
+        this.authors.allAuthors = authors.data.results;
+      } catch (error) {
+        this.authors.allAuthors = [];
+        
+      }
+    },
+    async searchQuotes(value) {
+      try {
+        const quotes = await axios.get(`http://api.quotable.io/search/quotes?query=${value}`);
+        this.quotes.page = 0;
+        this.quotes.allQuotes = quotes.data.results
+      } catch (error) {
+        this.quotes.allQuotes = [];
+        
+      }
+    },
     async getAuthors(){
       try {
+        if(this.page === 0) {
+          this.authors.allAuthors = [];
+        }
         this.authors.page++;
         const authors = await axios.get(`http://api.quotable.io/authors?page=${this.authors.page}`);
         this.authors.allAuthors = [...this.authors.allAuthors, ...authors.data.results];
@@ -60,6 +85,9 @@ export default {
 
     async getAllQuotes() {
       try {
+        if(this.page === 0) {
+          this.quotes.allQuotes = [];
+        }
         this.quotes.page++;
         console.log('sdasdasd')
         const quotes = await axios.get(`http://api.quotable.io/quotes?page=1=${this.quotes.page}`);
@@ -83,8 +111,12 @@ export default {
 }
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-
+main{
+  padding: 10px;
+}
 nav {
   padding: 30px;
   margin: auto;
