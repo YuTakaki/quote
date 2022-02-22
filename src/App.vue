@@ -1,14 +1,16 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/authors">Authors</router-link>
+    <router-link to="/authors">Authors</router-link> |
+    <router-link to="/quotes">Quotes</router-link>
   </nav>
   <router-view 
     :randomQuote="randomQuote"
     :authors="authors"
+    :quotes="quotes"
     @getAuthors="getAuthors"
+    @getAllQuotes="getAllQuotes"
     @getRandomQuote="getRandomQuote"
-
   />
 </template>
 
@@ -24,12 +26,15 @@ export default {
       authors : {
         allAuthors : [],
         page: 0,
+      },
+      quotes : {
+        allQuotes : [],
+        page: 0,
       }
     }
   },
   created() {
     this.getRandomQuote();
-    this.getAuthors();
   },
   methods : {
     async getAuthors(){
@@ -48,6 +53,17 @@ export default {
         const {content, author} = randomQuote.data;
         this.randomQuote.content = content;
         this.randomQuote.author = author;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getAllQuotes() {
+      try {
+        this.quotes.page++;
+        console.log('sdasdasd')
+        const quotes = await axios.get(`http://api.quotable.io/quotes?page=1=${this.quotes.page}`);
+        this.quotes.allQuotes = [...this.quotes.allQuotes, ...quotes.data.results];
       } catch (error) {
         console.log(error);
       }

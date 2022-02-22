@@ -21,7 +21,6 @@ div {
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: auto;
   background-color: aquamarine;
   padding: 5px 10px;
@@ -31,6 +30,9 @@ div {
 }
 p{
   align-self: flex-end;
+}
+h2{
+  text-align: center;
 }
 
 

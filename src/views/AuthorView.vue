@@ -22,6 +22,9 @@ export default {
   },
   components : {
     Button,
+  },
+  created() {
+    this.$emit('getAuthors')
   }
 }
 </script>

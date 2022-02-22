@@ -15,7 +15,12 @@ const routes = [
     path: '/authors/:slug',
     name: 'authors-profile',
     component: () => import('../views/AuthorProfileView')
-  }
+  },
+  {
+    path: '/quotes',
+    name: 'quotes',
+    component: () => import('../views/QuotesView.vue')
+  },
 ]
 
 const router = createRouter({
