@@ -50,6 +50,9 @@ main{
     h1{
       width: 70%;
     }
+    p{
+      margin-top: 20px;
+    }
 
   }
 }

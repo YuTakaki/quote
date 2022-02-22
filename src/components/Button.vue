@@ -16,5 +16,6 @@ export default {
 button{
   margin-left: 50%;
   transform: translateX(-50%);
+  margin-top: 10px;
 }
 </style>

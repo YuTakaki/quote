@@ -27,6 +27,7 @@ div {
   border-radius: 5px;
   box-shadow: 1px 1px 3px gray;
   margin-top: 30px;
+  padding: 20px;
 }
 p{
   align-self: flex-end;

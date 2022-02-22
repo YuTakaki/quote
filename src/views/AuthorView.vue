@@ -44,10 +44,14 @@ ul {
     margin: 10px;
     background-color: aquamarine;
     padding: 5px 10px;
+    padding: 20px;
     border-radius: 5px;
     width: 100%;
     box-shadow: 1px 1px 3px gray;
     cursor: pointer;
+    h2{
+      margin-bottom: 20px;
+    }
     a{
       text-decoration: none;
       color: black;
