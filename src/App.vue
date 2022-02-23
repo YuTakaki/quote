@@ -8,7 +8,6 @@
     :quotes="quotes"
     @getAuthors="getAuthors"
     @getAllQuotes="getAllQuotes"
-    @searchAuthor="searchAuthor"
     @searchQuotes="searchQuotes"
   />
 </template>
@@ -31,16 +30,7 @@ export default {
     this.getAllQuotes();
   },
   methods : {
-    async searchAuthor(value) {
-      try {
-        this.authors.page = 0;
-        const authors = await axios.get(`http://api.quotable.io/search/authors?query=${value}`);
-        this.authors.allAuthors = authors.data.results;
-      } catch (error) {
-        this.authors.allAuthors = [];
-        
-      }
-    },
+    
     async searchQuotes(value) {
       try {
         const quotes = await axios.get(`http://api.quotable.io/search/quotes?query=${value}`);

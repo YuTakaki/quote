@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Form @onSubmit="(value) => $emit('searchAuthor', value)" placeholder="search authors"/>
+    <Form @onSubmit="(value) => $store.dispatch('searchAuthor', value)" placeholder="search authors"/>
     <ul>
       <li v-bind:key="author._id" v-for="author in $store.getters.authors">
         <router-link :to="`/authors/${author.slug}`">

@@ -22,5 +22,15 @@ export const authorsStore = {
         console.log(error)
       }
     },
+    async searchAuthor({state},value) {
+      try {
+        state.page = 0;
+        const authors = await axios.get(`http://api.quotable.io/search/authors?query=${value}`);
+        state.allAuthors = authors.data.results;
+      } catch (error) {
+        state.allAuthors = [];
+        console.log(error);
+      }
+    },
   },
 }
