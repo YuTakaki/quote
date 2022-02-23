@@ -1,8 +1,8 @@
 <template>
   <main>
-    <Form @onSubmit="(value) => $emit('searchQuotes', value)" placeholder="search quotes"/>
-    <QuoteCard v-bind:key="quote._id" v-for="quote in quotes.allQuotes" :randomQuote="quote"/>
-    <Button @btnClick="$emit('getAllQuotes')" text="View more quotes" />
+    <Form @onSubmit="(value) => $store.dispatch('searchQuotes', value)" placeholder="search quotes"/>
+    <QuoteCard v-bind:key="quote._id" v-for="quote in $store.getters.quotes" :randomQuote="quote"/>
+    <Button @btnClick="$store.dispatch('getAllQuotes')" text="View more quotes" />
   </main>
   
 </template>
@@ -21,6 +21,5 @@ export default {
     Button,
     Form,
   },
-  
 }
 </script>

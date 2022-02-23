@@ -4,59 +4,17 @@
     <router-link to="/authors">Authors</router-link> |
     <router-link to="/quotes">Quotes</router-link>
   </nav>
-  <router-view 
-    :quotes="quotes"
-    @getAuthors="getAuthors"
-    @getAllQuotes="getAllQuotes"
-    @searchQuotes="searchQuotes"
-  />
+  <router-view />
 </template>
 
 <script>
-import axios from "axios";
-import {mapActions} from "vuex";
+
 export default {
-  data() {
-    return {
-      quotes : {
-        allQuotes : [],
-        page: 0,
-      }
-    }
-  },
   created() {
     this.$store.dispatch('getRandomQuote')
     this.$store.dispatch('getAuthors')
-    this.getAllQuotes();
+    this.$store.dispatch('getAllQuotes')
   },
-  methods : {
-    
-    async searchQuotes(value) {
-      try {
-        const quotes = await axios.get(`http://api.quotable.io/search/quotes?query=${value}`);
-        this.quotes.page = 0;
-        this.quotes.allQuotes = quotes.data.results
-      } catch (error) {
-        this.quotes.allQuotes = [];
-        
-      }
-    },
-    
-
-    async getAllQuotes() {
-      try {
-        if(this.page === 0) {
-          this.quotes.allQuotes = [];
-        }
-        this.quotes.page++;
-        console.log('sdasdasd')
-        const quotes = await axios.get(`http://api.quotable.io/quotes?page=1=${this.quotes.page}`);
-        this.quotes.allQuotes = [...this.quotes.allQuotes, ...quotes.data.results];
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
 }
 </script>
 

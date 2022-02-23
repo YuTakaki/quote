@@ -17,7 +17,6 @@ export const authorsStore = {
         state.page++;
         const authors = await axios.get(`http://api.quotable.io/authors?page=${state.page}`);
         state.allAuthors = [...state.allAuthors, ...authors.data.results];
-        console.log(state)
       } catch (error) {
         console.log(error)
       }

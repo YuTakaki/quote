@@ -11,9 +11,6 @@ export default {
   props : {
     randomQuote : Object
   },
-  created(){
-    console.log(this.randomQuote)
-  }
 }
 </script>
 
