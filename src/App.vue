@@ -5,30 +5,20 @@
     <router-link to="/quotes">Quotes</router-link>
   </nav>
   <router-view 
-    :randomQuote="randomQuote"
-    :authors="authors"
     :quotes="quotes"
     @getAuthors="getAuthors"
     @getAllQuotes="getAllQuotes"
-    @getRandomQuote="getRandomQuote"
     @searchAuthor="searchAuthor"
     @searchQuotes="searchQuotes"
   />
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
+import {mapActions} from "vuex";
 export default {
   data() {
     return {
-      randomQuote : {
-        content : '',
-        author : '',
-      },
-      authors : {
-        allAuthors : [],
-        page: 0,
-      },
       quotes : {
         allQuotes : [],
         page: 0,
@@ -36,8 +26,8 @@ export default {
     }
   },
   created() {
-    this.getRandomQuote();
-    this.getAuthors();
+    this.$store.dispatch('getRandomQuote')
+    this.$store.dispatch('getAuthors')
     this.getAllQuotes();
   },
   methods : {
@@ -61,29 +51,7 @@ export default {
         
       }
     },
-    async getAuthors(){
-      try {
-        if(this.page === 0) {
-          this.authors.allAuthors = [];
-        }
-        this.authors.page++;
-        const authors = await axios.get(`http://api.quotable.io/authors?page=${this.authors.page}`);
-        this.authors.allAuthors = [...this.authors.allAuthors, ...authors.data.results];
-      } catch (error) {
-        console.log(error)
-        
-      }
-    },
-    async getRandomQuote(){
-      try {
-        const randomQuote = await axios.get('http://api.quotable.io/random');
-        const {content, author} = randomQuote.data;
-        this.randomQuote.content = content;
-        this.randomQuote.author = author;
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    
 
     async getAllQuotes() {
       try {

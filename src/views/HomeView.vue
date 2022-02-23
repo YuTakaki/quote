@@ -1,7 +1,7 @@
 <template>
   <main>
-    <Button @btnClick="$emit('getRandomQuote')" text="Random"/>
-    <QuoteCard :randomQuote="randomQuote"/>
+    <Button @btnClick="$store.dispatch('getRandomQuote')" text="Random"/>
+    <QuoteCard :randomQuote="$store.getters.randomQuote"/>
     
   </main>
 </template>
@@ -11,9 +11,6 @@ import Button from "../components/Button.vue";
 import QuoteCard from '../components/QuoteCard.vue';
 
 export default {
-  props : {
-    randomQuote : Object
-  },
   components : {
     Button,
     QuoteCard

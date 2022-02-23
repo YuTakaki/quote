@@ -2,14 +2,14 @@
   <main>
     <Form @onSubmit="(value) => $emit('searchAuthor', value)" placeholder="search authors"/>
     <ul>
-      <li v-bind:key="author._id" v-for="author in authors.allAuthors">
+      <li v-bind:key="author._id" v-for="author in $store.getters.authors">
         <router-link :to="`/authors/${author.slug}`">
           <h2>{{author.name}}</h2>
           <p>{{author.description}}</p>
         </router-link>
       </li>
     </ul>
-    <Button @btnClick="$emit('getAuthors')" text="Load More Authors"/>
+    <Button @btnClick="$store.dispatch('getAuthors')" text="Load More Authors"/>
   </main>
   
 </template>
